@@ -1,7 +1,5 @@
 package com.example.demo.service.dto;
 
-import com.example.demo.domain.Role;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
