@@ -6,6 +6,8 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Employee;
@@ -43,7 +45,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public List<Employee> getAllEmployees() {
-		return employeeRepository.findAll();
+		Pageable firstPageWithTwoElements = PageRequest.of(2, 2);
+		return employeeRepository.findAll(firstPageWithTwoElements).toList();
 	}
 
 
