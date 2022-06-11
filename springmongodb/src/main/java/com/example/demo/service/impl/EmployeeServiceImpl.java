@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,18 +22,6 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	@Autowired
 	ModelMapper mapper;
-	
-	private TypeMap<Employee, EmployeeResponseDto> propertyMapper = null;
-	
-	public TypeMap<Employee, EmployeeResponseDto>createPropertyMapper(){
-		if(this.propertyMapper == null) {
-			return this.mapper.createTypeMap(Employee.class, EmployeeResponseDto.class);
-		}else {
-			return this.propertyMapper;
-		}
-		
-	}
-	
 	
 	@Override
 	public List<Employee> getEmployeeFilterBySalary(Double from, Double to) {
@@ -66,24 +53,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public List<EmployeeResponseDto> getEmployeesDto() {
-		List<EmployeeResponseDto>resp = new ArrayList<>();
-		propertyMapper = this.createPropertyMapper();
-		try {
-			propertyMapper.addMappings(
-				//mapper -> mapper.map(employee -> employee.getName()+ "--", EmployeeResponseDto::setDatosPersonales)
-				mapper -> {
-					mapper.map(employee -> employee.personalData(),EmployeeResponseDto::setDatosPersonales);
-					mapper.map(employee -> employee.getAdress().getCity() ,EmployeeResponseDto::setCity);
-				}
-			);
-		}catch (Exception e) {
-			System.out.println("exception".concat(e.getMessage()));
-		}
-		
+		List<EmployeeResponseDto>employees = new ArrayList<>();
 		employeeRepository.findAll().forEach(employee ->{
-			resp.add(this.mapper.map(employee, EmployeeResponseDto.class));
+			employees.add(this.mapper.map(employee, EmployeeResponseDto.class));
 		});
-		return resp;
+		return employees;
 	}
 
 }

@@ -9,8 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.domain.Employee;
 
 @Repository
-public interface EmployeeRepository extends MongoRepository<Employee, Integer> {
-
+public interface EmployeeRepository extends MongoRepository<Employee, String>{
 
 	@Query(value = "{'salary' : {$gte: ?0, $lte: ?1}}")
 	public List<Employee> getEmployeesFilterBySalary(Double from,Double to);

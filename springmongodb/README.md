@@ -66,6 +66,61 @@ _Ademas de utilizar los metodos propios de la interfaz MongoRepository, se agreg
 #### En el proyecto también vamos a trabajar con la clase ModelMapper🛠️ para poder generar los Dto´s necesarios en nuestra capa de negocio o servicio. 
 
 
+#### Para ejecutar la base mongodb via docker compose debera ser ejecutado:
+```bash
+D:\Luis\Chapter\Java\springmongodb>docker compose -f src/main/docker/mongodb.yml up -d
+```
+
+#### Realizar una post de datos se debera ejecutar
+```bash
+URL POST:  http://localhost:8080/employees/
+{
+    "cuil" : "12345678",
+    "name" : "nombre2",
+    "surname" : "apellido2",
+    "salary" : 50,
+    "fechaIngreso" : "2020-06-08T20:28:13.390+00:00",
+    "position" : "desarrollador"
+}
+```
+
+#### Realizar un GET que trae todos los empleados
+```bash
+URL GET:  http://localhost:8080/employees/
+RTA Similar
+[
+    {
+        "id": "62a1060ee9658e584e49d2ca",
+        "cuil": "12345678",
+        "name": "luis",
+        "surname": "moyano",
+        "salary": 100.0,
+        "fechaIngreso": null,
+        "position": "lider"
+    },
+    {
+        "id": "62a106605c1669068372a3b6",
+        "cuil": "12345678",
+        "name": "nombre",
+        "surname": "apellido",
+        "salary": 50.0,
+        "fechaIngreso": "2022-06-08T20:28:13.390+00:00",
+        "position": "desarrollador"
+    },
+    {
+        "id": "62a106b6e98c3c62c3fa3bf0",
+        "cuil": "12345678",
+        "name": "nombre2",
+        "surname": "apellido2",
+        "salary": 50.0,
+        "fechaIngreso": "2020-06-08T20:28:13.390+00:00",
+        "position": "desarrollador"
+    }
+]
+```
+
+
+
 ## 
 &emsp;
 
